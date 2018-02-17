@@ -20,7 +20,7 @@ while(loop_over_lattice(x,site)){
 for(mu=0;mu<D;mu++){	       // D is = 1
 e_mu=Lattice_Vector(mu);
 
-act_s=act_s-BETA*Tr(phi[i].get(x)*(
+act_s=act_s+BETA*Tr(phi[i].get(x)*(
 U.get(x,mu)*phi[i].get(x+e_mu)*Udag.get(x,mu)+                                  
 Udag.get(x-e_mu,mu)*phi[i].get(x-e_mu)*U.get(x-e_mu,mu)-
 2.0*phi[i].get(x))).real();
