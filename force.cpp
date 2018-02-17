@@ -95,10 +95,10 @@ while(loop_over_lattice(x,sites)){
 tmp=Umatrix();
 
 for(mu=0;mu<D;mu++){
-tmp=tmp+U.get(x,mu)*phi[i].get(x+e_mu)*Udag.get(x,mu)+                                  
+tmp=tmp+U.get(x,mu)*phi[i].get(x+e_mu)*Udag.get(x,mu)+
     Udag.get(x-e_mu,mu)*phi[i].get(x-e_mu)*U.get(x-e_mu,mu)-
     2.0*phi[i].get(x);}
-    
+
 if(RANK==(NCOLOR*NCOLOR-1)){
 tmp=tmp-(1.0/NCOLOR)*Tr(tmp)*Umatrix(1);}
 

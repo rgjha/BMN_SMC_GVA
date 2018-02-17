@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Force recompile
+echo "Compiling..."
+rm -f susy_hmc
+g++ -O *.cpp -o susy_hmc -llapack -lblas
+
+# Set up parameters file
+echo "3       0      1    1.0     3.0  0.01  0" > parameters
+echo "SWEEPS  THERM  GAP  LAMBDA  MU   DT    READIN" >> parameters
+
+# Run
+echo "Running..."
+./susy_hmc &> test.out
+
+# Compare against reference output
+# TODO : Robust comparisons need a means to specify the random seed...
+d="`diff -I'seed' test.ref test.out`"
+if [ -n "$d" ] ; then   # Non-zero string length
+  echo "test.ref and test.out differ:"
+  echo "$d"
+else
+  echo "PASS: susy_hmc reproduces reference output"
+fi
+
+# Clean up clutter
+rm -f data dump eigen hmc_test lines parameters pfaffian scalar

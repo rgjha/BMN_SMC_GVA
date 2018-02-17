@@ -1,0 +1,5 @@
+.DS_Store
+*.d
+*.o
+*.sw[op]
+susy_hmc

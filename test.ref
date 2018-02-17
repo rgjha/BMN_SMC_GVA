@@ -1,0 +1,43 @@
+16 supercharge theory in 1D
+--------------------------------
+Number of colors 2
+Temporal extent 5
+Inverse temperature 1
+Mass parameter 0.6
+Lattice Coupling 125
+Thermalization sweeps 0
+Number of sweeps 3
+Gap between measurements 1
+Time step in leapfrog eqs 0.01
+Trajectory length 10
+Minimax approx degree 15
+Reading initial config: (1 for yes, 0 for no) 0
+periodic temporal bc for fermions
+--------------------------------
+Computing generators for SU(N)
+min and max eigenvalue are 1e-12	100
+relative error is 4e-04 in (15,15) approx
+Computing Gamma matrices
+Got seed 4104867070 from /dev/random
+Warming up
+using thermalization DT 0.005
+Commencing measurement sweeps
+Updated DT is 0.01
+-------------*****--------------
+H at beginning traj 510.196
+H at end of traj 602.224
+hmc_test 1.07812e-40 failed
+REJECTED with deltaH of 92.0282
+sweep no. 1
+-------------*****--------------
+H at beginning traj 515.884
+H at end of traj 591.03
+hmc_test 2.31554e-33 failed
+REJECTED with deltaH of 75.1457
+sweep no. 2
+-------------*****--------------
+H at beginning traj 484.804
+H at end of traj 579.302
+hmc_test 9.11997e-42 failed
+REJECTED with deltaH of 94.4981
+sweep no. 3
