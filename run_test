@@ -3,19 +3,22 @@
 # Force recompile
 echo "Compiling..."
 rm -f susy_hmc
-g++ -O *.cpp -o susy_hmc -llapack -lblas
+g++ -O3 *.cpp -o susy_hmc -llapack -lblas
 
 # Set up parameters file
-echo "3       0      1    1.0     3.0  0.01  0" > parameters
-echo "SWEEPS  THERM  GAP  LAMBDA  MU   DT    READIN" >> parameters
+echo "3       0      1    1.0     3.0  0.01  0       41" > parameters
+echo "SWEEPS  THERM  GAP  LAMBDA  MU   DT    READIN  SEED" >> parameters
 
 # Run
 echo "Running..."
+ts=$(date +%s%N)
 ./susy_hmc &> test.out
+t=$((($(date +%s%N) - $ts)/1000000))
+echo -e "\nRuntime: $t msec" >> test.out
 
 # Compare against reference output
 # TODO : Robust comparisons need a means to specify the random seed...
-d="`diff -I'seed' test.ref test.out`"
+d="`diff -I'Runtime' test.ref test.out`"
 if [ -n "$d" ] ; then   # Non-zero string length
   echo "test.ref and test.out differ:"
   echo "$d"

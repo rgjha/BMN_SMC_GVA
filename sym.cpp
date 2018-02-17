@@ -17,7 +17,7 @@ Gauge_Field U;
 Site_Field phi[NSCALAR];
 Site_Field F[NFERMION];
 
-
+SEED = -1;
 read_param();
 
 if(READIN){

@@ -18,26 +18,25 @@ Computing generators for SU(N)
 min and max eigenvalue are 1e-12	100
 relative error is 4e-04 in (15,15) approx
 Computing Gamma matrices
-Got seed 4104867070 from /dev/random
+Got seed 41 from user input
 Warming up
 using thermalization DT 0.005
 Commencing measurement sweeps
 Updated DT is 0.01
 -------------*****--------------
-H at beginning traj 510.196
-H at end of traj 602.224
-hmc_test 1.07812e-40 failed
-REJECTED with deltaH of 92.0282
+H at beginning traj 1363.67
+H at end of traj 1362.84
+ACCEPTED with deltaH of -0.833427
 sweep no. 1
 -------------*****--------------
-H at beginning traj 515.884
-H at end of traj 591.03
-hmc_test 2.31554e-33 failed
-REJECTED with deltaH of 75.1457
+H at beginning traj 1262.6
+H at end of traj 1262.24
+ACCEPTED with deltaH of -0.358358
 sweep no. 2
 -------------*****--------------
-H at beginning traj 484.804
-H at end of traj 579.302
-hmc_test 9.11997e-42 failed
-REJECTED with deltaH of 94.4981
+H at beginning traj 1249.97
+H at end of traj 1249.67
+ACCEPTED with deltaH of -0.304943
 sweep no. 3
+
+Runtime: 6808 msec

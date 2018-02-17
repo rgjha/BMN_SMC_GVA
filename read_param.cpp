@@ -1,13 +1,13 @@
 #include "read_param.h"
 
-
 void read_param(void){
 double LAMBDA;
 ifstream f_in("parameters");
-if(!f_in.good()){
-	cout << "\ncan't open file parameters to read data!\n";
-	exit(1);}
-f_in>>SWEEPS>>THERM>>GAP>>LAMBDA>>MU>>DT>>READIN;
+if(!f_in.good()) {
+  cout << "\ncan't open file parameters to read data!\n";
+  exit(1);
+}
+f_in>>SWEEPS>>THERM>>GAP>>LAMBDA>>MU>>DT>>READIN>>SEED;
 
 // LAMBDA=INV TEMP!
 BETA=(NCOLOR*T*T*T*0.5)/pow(LAMBDA,3.0);
