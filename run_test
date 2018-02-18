@@ -17,7 +17,6 @@ t=$((($(date +%s%N) - $ts)/1000000))
 echo -e "\nRuntime: $t msec" >> test.out
 
 # Compare against reference output
-# TODO : Robust comparisons need a means to specify the random seed...
 d="`diff -I'Runtime' test.ref test.out`"
 if [ -n "$d" ] ; then   # Non-zero string length
   echo "test.ref and test.out differ:"
