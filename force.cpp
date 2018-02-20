@@ -3,16 +3,17 @@
 void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
            Site_Field f_phi[], const Site_Field F[], Site_Field f_F[]) {
 
-  Lattice_Vector x, e_mu;
+  Lattice_Vector x, e_mu, xm1;
   int sites, mu, nu, i, j, k, n;
   double td;
+  Complex trace;
   Site_Field sol[NFERMION][DEGREE], psol[NFERMION][DEGREE];
   Gauge_Field Udag, utmp;
   Site_Field ptmp[NFERMION],stmp[NFERMION];
   Site_Field phitmp[NSCALAR];
-  Umatrix tmp;
+  Umatrix tmp, tU;
 
-  // gauge force -- scalar contribution
+  // Gauge force -- scalar contribution
   Udag = Adj(U);
   sites = 0;
   while (loop_over_lattice(x, sites)) {
@@ -20,39 +21,41 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
       e_mu = Lattice_Vector(mu);
       tmp = Umatrix();
 
-      for (i = 0; i < NSCALAR; i++)
-        tmp = tmp + phi[i].get(x) * U.get(x, mu) * phi[i].get(x + e_mu) * Udag.get(x, mu);
+      for (i = 0; i < NSCALAR; i++) {
+        tU = U.get(x, mu) * phi[i].get(x + e_mu) * Udag.get(x, mu);
+        tmp = tmp + phi[i].get(x) * tU;
+      }
 
-      tmp = tmp - Adj(tmp);     // !!!
-
-      // remove trace if SU(N)
-      if (RANK == (NCOLOR * NCOLOR - 1))
-        tmp = tmp - (1.0 / NCOLOR) * Tr(tmp) * Umatrix(1);
+      // Make traceless anti-hermitian
+      tmp = tmp - Adj(tmp);
+      trace = Tr(tmp);
+      if (trace.norm() > TRACETOL)
+        tmp = tmp - (1.0 / NCOLOR) * trace * Umatrix(1);
 
       f_U.set(x, mu, -2.0 * BETA * tmp);
     }
   }
 
-  // scalar force - self-interaction
-  // for scalar-scalar potential
+  // Scalar force contributions from scalar--scalar self-interactions
   for (i = 0; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
-      tmp=Umatrix();
-      for (j = 0; j < NSCALAR; j++) {
+      tmp =Umatrix();
+      for  (j = 0; j < NSCALAR; j++) {
         if (i == j)
           continue;
         tmp = tmp + comm(phi[j].get(x), comm(phi[i].get(x), phi[j].get(x)));
       }
 
-      if (RANK == (NCOLOR * NCOLOR - 1))
-        tmp = tmp - (1.0 / NCOLOR) * Tr(tmp) * Umatrix(1);
+      trace = Tr(tmp);
+      if (trace.norm() > TRACETOL)
+        tmp = tmp - (1.0 / NCOLOR) * trace * Umatrix(1);
 
       f_phi[i].set(x, -2.0 * BETA * tmp);
     }
   }
 
-  // scalar force - mass terms
+  // Scalar force contributions from mass terms
   td = 2.0 * BETA * MU * MU;
   for (i = 0; i < 3; i++) {
     sites = 0;
@@ -61,18 +64,18 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
     }
   }
 
-  td = 2.0 * BETA * 0.25 * MU * MU;
+  td = 0.5 * BETA * MU * MU;
   for (i = 3; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites))
       f_phi[i].set(x, f_phi[i].get(x) - td * phi[i].get(x));
   }
 
-  td = BETA * 3 * 2 * sqrt(2.0) * MU;
+  td = BETA * 6.0 * sqrt(2.0) * MU;
   for (i = 0; i < 3; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
-      tmp=Umatrix();
+      tmp = Umatrix();
       for (j = 0; j < 3; j++) {
         if (i == j)
           continue;
@@ -86,21 +89,25 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
     }
   }
 
-  // Scalar force -- kinetic term
+  // Scalar force contributions from kinetic term
+  td = 2.0 * BETA;
   for (i = 0; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
       tmp = Umatrix();
       for (mu = 0; mu < D; mu++) {
+        e_mu = Lattice_Vector(mu);
+        xm1 = x - e_mu;
+        tU = Udag.get(xm1, mu) * phi[i].get(xm1) * U.get(xm1, mu);
         tmp = tmp + U.get(x, mu) * phi[i].get(x + e_mu) * Udag.get(x, mu)
-                  + Udag.get(x - e_mu, mu) * phi[i].get(x - e_mu) * U.get(x - e_mu, mu)
-                  - 2.0 * phi[i].get(x);
+                  + tU - 2.0 * phi[i].get(x);
       }
 
-      if (RANK == (NCOLOR * NCOLOR - 1))
-        tmp = tmp - (1.0 / NCOLOR) * Tr(tmp) * Umatrix(1);
+      trace = Tr(tmp);
+      if (trace.norm() > TRACETOL)
+        tmp = tmp - (1.0 / NCOLOR) * trace * Umatrix(1);
 
-      f_phi[i].set(x, f_phi[i].get(x) + 2.0 * BETA * tmp);
+      f_phi[i].set(x, f_phi[i].get(x) + td * tmp);
     }
   }
 
