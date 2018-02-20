@@ -24,19 +24,19 @@ using thermalization DT 0.005
 Commencing measurement sweeps
 Updated DT is 0.01
 -------------*****--------------
-H at beginning traj 1363.67
-H at end of traj 1362.84
-ACCEPTED with deltaH of -0.833427
+H at beginning traj 981.934
+H at end of traj 981.359
+ACCEPTED with deltaH of -0.574512
 sweep no. 1
 -------------*****--------------
-H at beginning traj 1262.6
-H at end of traj 1262.24
-ACCEPTED with deltaH of -0.358358
+H at beginning traj 957.333
+H at end of traj 956.519
+ACCEPTED with deltaH of -0.813528
 sweep no. 2
 -------------*****--------------
-H at beginning traj 1249.97
-H at end of traj 1249.67
-ACCEPTED with deltaH of -0.304943
+H at beginning traj 901.066
+H at end of traj 900.72
+ACCEPTED with deltaH of -0.345131
 sweep no. 3
 
-Runtime: 6808 msec
+Runtime: 4058 msec

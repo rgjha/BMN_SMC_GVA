@@ -7,12 +7,10 @@ using namespace std;
 
 #include <math.h>
 #include <stdlib.h>
-//#include <malloc.h>
-
 
 // 16-supercharge SYM in 1 dim
-// compile with g++ -O3 *.cpp -llapack -lblas -lg2c
-// reads parameters from file parameters
+// Compile with g++ -O3 *.cpp -llapack -lblas -lg2c
+// Reads parameters from file parameters
 
 const int FERMIONS = 1;
 const int L = 1;
@@ -23,13 +21,12 @@ const int NFERMION = 16;
 const int KDFERMION = 8;
 const int SITES = L * T;
 const int NCOLOR = 2;
-//const int RANK = (NCOLOR * NCOLOR - 1);
-const int RANK = (NCOLOR * NCOLOR);   // !!!
-const int FERMIONSIZE = (RANK * SITES * NFERMION);
+const int RANK = NCOLOR * NCOLOR - 1;
+const int FERMIONSIZE = RANK * SITES * NFERMION;
 const double GAUGETOL = 0.00000000000001;
-const double TRACETOL = 1e8;       // Will be used to test norm()
+const double TRACETOL = 1e-8;       // Will be used to test norm()
 const int DEGREE = 15;
-const double NORM = (1.0/sqrt(4.0*D));
+const double NORM = 0.5 / sqrt(D);
 const double PBC = 1.0;
 
 extern double ampdeg,amp[DEGREE],shift[DEGREE];
