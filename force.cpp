@@ -40,7 +40,7 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
   for (i = 0; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
-      tmp =Umatrix();
+      tmp = Umatrix();
       for  (j = 0; j < NSCALAR; j++) {
         if (i == j)
           continue;
@@ -111,6 +111,16 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
     }
   }
 
+  // Have checked that scalar forces are already traceless
+//  for (i = 0; i < NSCALAR; i++) {
+//    sites = 0;
+//    while (loop_over_lattice(x, sites)) {
+//      trace = Tr(f_phi[i].get(x));
+//      if (trace.norm() > TRACETOL)
+//        f_phi[i].set(x, f_phi[i].get(x) - (1.0 / NCOLOR) * trace * Umatrix(1));
+//    }
+//  }
+
   // Add contributions from pseudofermions
   // Use partial fraction approx to inverse square root of operator
   for (i = 0; i < NFERMION; i++)
@@ -143,8 +153,8 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
     }
   }
 
-  for (i = 0; i < NFERMION; i++) {
-    f_F[i] = Adj(-1.0 * f_F[i]);}
+  for (i = 0; i < NFERMION; i++)
+    f_F[i] = Adj(-1.0 * f_F[i]);
 
   return;
 }

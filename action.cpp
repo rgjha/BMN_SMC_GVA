@@ -49,7 +49,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
   for (i = 0; i < 3; i++) {
     site = 0;
     while (loop_over_lattice(x, site))
-      act_s=act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+      act_s = act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
   }
 
   td = BETA * 0.25 * MU * MU;
@@ -77,7 +77,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
     }
   }
 
-  // pseudofermion contribution
+  // Pseudofermion contribution
   if (FERMIONS) {
     for (i = 0; i < NFERMION; i++)
       act_F = act_F + ampdeg * Tr(Adj(F[i]) * F[i]).real();
