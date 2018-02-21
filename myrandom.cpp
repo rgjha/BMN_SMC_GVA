@@ -76,34 +76,36 @@ double ran3(long *idum) {
 #undef MZ
 #undef FAC
 
-double myrandom(void) {
+double myrandom() {
   static long idum;
-  static int first_time=1;
+  static int first_time = 1;
 
-  if(first_time) {
-    idum=(-random_seed());
-    first_time=0;
+  if (first_time) {
+    idum = (-random_seed());
+    first_time = 0;
   }
 
   return(ran3(&idum));
 }
 
-double gasdev(void) {
-  static int iset=0;
+double gasdev() {
+  static int iset = 0;
   static double gset;
-  double fac,rsq,v1,v2;
-  if(iset==0) {
-    do{
-      v1=2.0*myrandom()-1.0;
-      v2=2.0*myrandom()-1.0;
-      rsq=v1*v1+v2*v2;
-    }
-    while(rsq>=1.0 || rsq == 0.0);
-    fac=sqrt(-2.0*log(rsq)/rsq);
-    gset=v1*fac;
-    iset=1;
-    return(v2*fac);}
+  double fac, rsq, v1, v2;
+
+  if (iset == 0) {
+    do {
+      v1 = 2.0 * myrandom() - 1.0;
+      v2 = 2.0 * myrandom() - 1.0;
+      rsq = v1 * v1 + v2 * v2;
+    } while (rsq >= 1.0 || rsq == 0.0);
+    fac = sqrt(-2.0 * log(rsq) / rsq);    // !!!
+    gset = v1 * fac;
+    iset = 1;
+    return v2 * fac;
+  }
   else {
-    iset=0;
-    return(gset);}
+    iset = 0;
+    return gset;
+  }
 }

@@ -80,7 +80,7 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
         if (i == j)
           continue;
         for (k = 0; k < 3; k++) {
-          if ((i==k) || (j==k))
+          if ((i == k) || (j == k))
             continue;
           tmp = tmp + phi[j].get(x) * phi[k].get(x) * epsilon[i][j][k];
         }
