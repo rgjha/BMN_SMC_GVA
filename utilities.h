@@ -30,15 +30,16 @@ const double NORM = 0.5 / sqrt(D);
 const double PBC = 1.0;
 
 extern double ampdeg,amp[DEGREE],shift[DEGREE];
-extern double BETA,DT,MASS,TIME,MU;
-extern int SWEEPS,GAP,START,THERM,READIN,SEED;
+extern double BETA, DT, MASS, TIME, MU;
+extern int SWEEPS, GAP, START, THERM, READIN, SEED;
 extern double f[RANK][RANK][RANK];
-extern double SMALLCUT, LARGECUT,PHYSGAP;
+extern double SMALLCUT, LARGECUT;
 extern int TRAJECTORY_LENGTH;
+extern int epsilon[3][3][3];
 
 class Complex{
   private:
-    double re,im;
+    double re, im;
   public:
     Complex();
     Complex(double, double);
@@ -61,7 +62,6 @@ inline Complex operator *(const Complex &o1, const double o2){
   return(Complex(o1.real()*o2,o1.imag()*o2));}
 inline Complex operator *(const double o1, const Complex &o2){
   return(Complex(o2.real()*o1,o2.imag()*o1));}
-
 
 Complex operator /(const Complex &, const Complex &);
 Complex pow(const Complex &, const int);
@@ -115,7 +115,7 @@ public:
   void set(int, int);
   int get(int) const;
   void print(void) const;
-  };
+};
 
 Lattice_Vector operator +(const Lattice_Vector &x, const Lattice_Vector &y);
 Lattice_Vector operator -(const Lattice_Vector &x, const Lattice_Vector &y);
@@ -137,7 +137,6 @@ public:
 
 Gauge_Field Adj(const Gauge_Field &);
 
-
 class Site_Field{
 private:
   Umatrix points[SITES];
@@ -158,7 +157,6 @@ Site_Field operator *(const Complex &, const Site_Field &);
 Umatrix operator *(const Site_Field &, const Site_Field &);
 Site_Field comm(const Site_Field &, const Site_Field &);
 
-
 Site_Field Dplus(const Gauge_Field &, const Site_Field &);
 Site_Field Dminus(const Gauge_Field &, const Site_Field &);
 
@@ -172,6 +170,4 @@ extern Umatrix Lambda[RANK];
 extern Gamma_Matrix Gamma[NSCALAR-2],Gam123;
 
 double gasdev(void);
-
-extern int epsilon[3][3][3];
 #endif

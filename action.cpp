@@ -17,7 +17,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
   //                + Udag_mu(x - mu) * phi_i(x - e_mu) * U_mu(x - mu)
   //                - 2phi_i(x)}]
   // Equivalently (by cyclicity and sum over x)
-  //   2Tr[phi_i(x) {U_mu(x) phi_i(x + mu) * Udag_mu(x) - phi_i(x)}]
+  //   2Tr[phi_i(x) {U_mu(x) phi_i(x + mu) Udag_mu(x) - phi_i(x)}]
   td = 2.0 * BETA;
   for (i = 0; i < NSCALAR; i++) {           // NSCALAR = 9
     site = 0;
@@ -32,7 +32,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
     }
   }
 
-  // Scalar--scalar potential -Tr[phi_i, phi_j]^2
+  // Scalar--scalar potential -sum_{i<j} Tr[phi_i, phi_j]^2
   for (i = 0; i < NSCALAR; i++) {
     for (j = i + 1; j < NSCALAR; j++) {
       site = 0;

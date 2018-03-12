@@ -1,8 +1,8 @@
 #include "utilities.h"
 
 // Complex type
-Complex::Complex(void) {re=0.0;im=0.0;}
-Complex::Complex(double x, double y) {re=x;im=y;}
+Complex::Complex(void) {re = 0.0; im = 0.0;}
+Complex::Complex(double x, double y) {re = x; im = y;}
 double Complex::real(void) const{return(re);}
 double Complex::imag(void) const{return(im);}
 double Complex::norm(void) {return(sqrt(re*re+im*im));}

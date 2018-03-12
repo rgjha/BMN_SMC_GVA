@@ -37,6 +37,7 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
   }
 
   // Scalar force contributions from scalar--scalar self-interactions
+  //   -2sum_{i != j} [phi_j, [phi_i, phi_j]]
   for (i = 0; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
