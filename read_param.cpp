@@ -9,14 +9,10 @@ if(!f_in.good()) {
 }
 f_in>>SWEEPS>>THERM>>GAP>>LAMBDA>>MU>>DT>>READIN>>SEED;
 
-// LAMBDA=INV TEMP!
-BETA=(NCOLOR*T*T*T*0.5)/pow(LAMBDA,3.0);
-//BETA=1.0;
+BETA=(NCOLOR*0.25)/LAMBDA; 
 
-TRAJECTORY_LENGTH=(int)(0.1/DT);
-//TRAJECTORY_LENGTH=100;
+TRAJECTORY_LENGTH=(int)(1/DT);
 
-MU=MU/T;
 if(FERMIONS){cout << "16 supercharge theory in 1D\n" ;}
 else
 {cout << "0 supercharge theory in 1D\n";}

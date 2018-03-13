@@ -12,9 +12,9 @@ using namespace std;
 // Compile with g++ -O3 *.cpp -llapack -lblas -lg2c
 // Reads parameters from file parameters
 
-const int FERMIONS = 1;
+const int FERMIONS = 0;
 const int L = 1;
-const int T = 5;
+const int T = 4;
 const int D = 1;
 const int NSCALAR = 9;
 const int NFERMION = 16;
