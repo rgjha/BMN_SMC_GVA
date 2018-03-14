@@ -28,8 +28,8 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   for (i = 0; i < NFERMION; i++)
     p_F[i] = Site_Field(2);
 
+  cout << "-------------*****--------------" << endl;
   K_old = kinetic_energy(p_U, p_phi, p_F);
-  //cout << "kold  is " << K_old << "\n";
 
   if (first_time) {
     f_hmc.open("hmc_test");
@@ -64,9 +64,10 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   for (i = 0; i < NFERMION; i++)
     old_f_F[i] = f_F[i];
 
-  cout << "-------------*****--------------" << endl;
+    
+  cout << "Action at beginning traj " << S_old << "\n" << flush;
   cout << "H at beginning traj " << H_old << "\n" << flush;
-
+    
   // MD evolution
   for (i = 0; i < TRAJECTORY_LENGTH; i++)
     evolve_fields(U, p_U, f_U, phi, p_phi, f_phi, F, p_F, f_F);
@@ -75,6 +76,7 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   K_new = kinetic_energy(p_U, p_phi, p_F);
   H_new = S_new + K_new;
 
+  cout << "Action at end of traj " << S_new << "\n" << flush;
   cout << "H at end of traj " << H_new << "\n" << flush;
 
   // MRT test

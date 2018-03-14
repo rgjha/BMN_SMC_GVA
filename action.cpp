@@ -4,7 +4,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
               const Site_Field F[NFERMION]) {
 
   int mu, nu, site, i, j, k, n;
-  double act_s = 0.0, act_F = 0.0, td;
+  double act_s = 0.0, act_F = 0.0, td, boson=0.0, Myers=0.0, so3=0.0, so6=0.0;
   Lattice_Vector x,e_mu;
   Umatrix tU;
   Gauge_Field Udag;
@@ -42,6 +42,8 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
       }
     }
   }
+  boson = act_s;
+  cout << "boson " << boson << endl;
 
   // BMN mass terms -mu^2   Tr[phi_i phi_i] for i = 0, 1, 2
   //                -mu^2/4 Tr[phi_i phi_i] for i = 3, 4, 5, 6, 7, 8
@@ -50,14 +52,18 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
     site = 0;
     while (loop_over_lattice(x, site))
       act_s = act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+      so3 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
   }
+  cout << "so3 " << so3 << endl;
 
   td = BETA * 0.25 * MU * MU;
   for (i = 3; i < NSCALAR; i++) {
     site = 0;
     while (loop_over_lattice(x, site))
       act_s = act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+      so6 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
   }
+  cout << "so6 " << act_s - boson - so3 << endl;
 
   // Cubic term -sqrt(8) mu epsilon_ijk phi_i phiφ_j phi_k
   td = BETA * 2.0 * sqrt(2.0) * MU;
@@ -72,22 +78,27 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
         while (loop_over_lattice(x, site)) {
           tU = phi[i].get(x) * phi[j].get(x) * phi[k].get(x);
           act_s = act_s - td * epsilon[i][j][k] * Tr(tU).real();
+          Myers -= td * epsilon[i][j][k] * Tr(tU).real();
         }
       }
     }
   }
-
-  // Pseudofermion contribution
-  if (FERMIONS) {
-    for (i = 0; i < NFERMION; i++)
-      act_F = act_F + ampdeg * Tr(Adj(F[i]) * F[i]).real();
-
-    MCG_solver(U,phi,F, shift, sol,psol);
-
-    for (n = 0; n < DEGREE; n++) {
-      for (i = 0; i < NFERMION; i++)
-        act_F = act_F + amp[n] * Tr(Adj(F[i]) * sol[i][n]).real();
+  cout << "Myers " << Myers << endl;
+    
+    // Pseudofermion contribution
+    if (FERMIONS) {
+        for (i = 0; i < NFERMION; i++)
+            act_F = act_F + ampdeg * Tr(Adj(F[i]) * F[i]).real();
+        
+        MCG_solver(U,phi,F, shift, sol,psol);
+        
+        for (n = 0; n < DEGREE; n++) {
+            for (i = 0; i < NFERMION; i++)
+                act_F = act_F + amp[n] * Tr(Adj(F[i]) * sol[i][n]).real();
+        }
     }
-  }
+
+
+
   return (act_s + act_F);
 }
