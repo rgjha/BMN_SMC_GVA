@@ -29,45 +29,45 @@ Got seed 41 from user input
 -------------*****--------------
 KE = (Umom + Xmom) = 3.12485 + 45.0079
 boson 4.82707
-so3 0.0099367
-so6 0.0661696
-Myers -0.0372802
-Action at beginning traj 4.86589
-H at beginning traj 52.9986
+so3 0.00110408
+so6 0.000461444
+Myers -0.0124267
+Action at beginning traj 4.8231
+H at beginning traj 52.9558
 boson 10.4324
-so3 0.0258876
-so6 0.227277
-Myers -0.357181
+so3 0.0028764
+so6 0.0016763
+Myers -0.11906
 KE = (Umom + Xmom) = 2.37044 + 40.3017
-Action at end of traj 10.3284
-H at end of traj 53.0005
-ACCEPTED with deltaH of 0.00188851
+Action at end of traj 10.3415
+H at end of traj 53.0136
+ACCEPTED with deltaH of 0.0577712
 sweep no. 1
 -------------*****--------------
 KE = (Umom + Xmom) = 10.1735 + 45.275
-Action at beginning traj 10.3284
-H at beginning traj 65.7769
+Action at beginning traj 10.3415
+H at beginning traj 65.79
 boson 16.1423
-so3 0.0966587
-so6 0.204251
-Myers -0.189572
+so3 0.0107399
+so6 0.00138203
+Myers -0.0631906
 KE = (Umom + Xmom) = 5.28226 + 44.2426
-Action at end of traj 16.2536
-H at end of traj 65.7785
-ACCEPTED with deltaH of 0.00163861
+Action at end of traj 16.1125
+H at end of traj 65.6374
+ACCEPTED with deltaH of -0.152542
 sweep no. 2
 -------------*****--------------
 KE = (Umom + Xmom) = 5.89322 + 52.1988
-Action at beginning traj 16.2536
-H at beginning traj 74.3457
+Action at beginning traj 16.1125
+H at beginning traj 74.2046
 boson 25.0175
-so3 0.0463731
-so6 0.333342
-Myers 0.264499
+so3 0.00515257
+so6 0.00451688
+Myers 0.0881662
 KE = (Umom + Xmom) = 4.34086 + 44.3592
-Action at end of traj 25.6618
-H at end of traj 74.3618
-ACCEPTED with deltaH of 0.0161092
+Action at end of traj 25.1479
+H at end of traj 73.8479
+ACCEPTED with deltaH of -0.356653
 sweep no. 3
 
-Runtime:  msec
+Runtime: 1483 msec

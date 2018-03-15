@@ -11,11 +11,11 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   static ofstream f_hmc;
 
   static Gauge_Field f_U;
-  Gauge_Field p_U,old_U,old_f_U;
+  Gauge_Field p_U, old_U, old_f_U;
   static Site_Field f_phi[NSCALAR];
-  Site_Field p_phi[NSCALAR],old_phi[NSCALAR],old_f_phi[NSCALAR];
+  Site_Field p_phi[NSCALAR], old_phi[NSCALAR], old_f_phi[NSCALAR];
   static Site_Field f_F[NFERMION];
-  Site_Field p_F[NFERMION],old_F[NFERMION],old_f_F[NFERMION];
+  Site_Field p_F[NFERMION], old_F[NFERMION], old_f_F[NFERMION];
 
   no_calls++;
 

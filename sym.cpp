@@ -25,7 +25,7 @@ int main(void) {
     read_in(U, phi, F);
     check(U);
   }
-  else{
+  else {
     U = Gauge_Field(1);
     for (i = 0; i < NSCALAR; i++)
       phi[i] = WIDTH * Site_Field(1);

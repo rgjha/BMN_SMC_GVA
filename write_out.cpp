@@ -7,7 +7,7 @@ void write_out(const Gauge_Field &u, const Site_Field phi[],
   int j, mu, site;
   Lattice_Vector x;
 
-  f_write.open("dump");
+  f_write.open("/tmp/dump");   // !!! Needs absolute path
   if (f_write.bad())
     cout << "error opening config file\n" << flush;
 

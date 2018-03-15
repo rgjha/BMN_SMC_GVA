@@ -10,23 +10,23 @@ double kinetic_energy(const Gauge_Field &p_U, const Site_Field p_phi[],
 
   // note minus sign to take into account AH Lambdas
   sites = 0;
-  while (loop_over_lattice(x,sites)){
+  while (loop_over_lattice(x,sites)) {
     for (mu = 0; mu < D; mu++)
       dum = dum + 0.5 * Tr(Adj(p_U.get(x, mu)) * p_U.get(x, mu));
   }
-  
+
   Umom = dum.real();
 
   for (i = 0; i < NSCALAR; i++)
     dum = dum + 0.5 * Tr(Adj(p_phi[i]) * p_phi[i]);
-    
+
   Xmom = dum.real() - Umom;
 
-    if (FERMIONS) {
+  if (FERMIONS) {
     for (i = 0; i < NFERMION; i++)  // !?
-    dum = dum + Tr(Adj(p_F[i]) * p_F[i]);
-    }
-    
-  cout << "KE = (Umom + Xmom) = " << Umom << " + " << Xmom << "\n" << flush;
+      dum = dum + Tr(Adj(p_F[i]) * p_F[i]);
+  }
+
+  cout << "Umom " << Umom << " Xmom " << Xmom << "\n" << flush;
   return dum.real();
 }
