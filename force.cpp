@@ -57,7 +57,7 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
   }
 
   // Scalar force contributions from mass terms
-  td = 2.0 * BETA * MU * MU;
+  td = BETA * MU * MU / 4.5;
   for (i = 0; i < 3; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {
@@ -65,14 +65,14 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
     }
   }
 
-  td = 0.5 * BETA * MU * MU;
+  td = BETA * MU * MU / 18.0;
   for (i = 3; i < NSCALAR; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites))
       f_phi[i].set(x, f_phi[i].get(x) - td * phi[i].get(x));
   }
 
-  td = BETA * 6.0 * sqrt(2.0) * MU;
+  td = BETA * 2.0 * sqrt(2.0) * MU;
   for (i = 0; i < 3; i++) {
     sites = 0;
     while (loop_over_lattice(x, sites)) {

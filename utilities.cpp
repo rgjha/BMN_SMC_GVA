@@ -23,7 +23,7 @@ Complex operator /(const Complex &o1, const Complex &o2) {
   Complex dum;
   double norm;
   norm=o2.real()*o2.real()+o2.imag()*o2.imag();
-  dum=Complex((o1.real()*o2.real()+o1.imag()*o2.imag())/norm,
+  dum = Complex((o1.real()*o2.real()+o1.imag()*o2.imag())/norm,
       (o1.imag()*o2.real()-o1.real()*o2.imag())/norm);
   return dum;
 }
@@ -103,9 +103,9 @@ Umatrix operator *(const Umatrix &o1, const Umatrix &o2) {
   Complex dum;
   for (int i = 0;i<NCOLOR;i++)
     for (int j = 0;j<NCOLOR;j++) {
-      dum=Complex();
+      dum = Complex();
       for (int k = 0;k<NCOLOR;k++)
-        dum=dum+o1.get(i,k)*o2.get(k,j);
+        dum = dum+o1.get(i,k)*o2.get(k,j);
       r.set(i,j,dum);
     }
   return(r);
@@ -190,16 +190,16 @@ Umatrix exp(const Umatrix &u) {
 }
 
 Complex Tr(const Umatrix &o) {
-  Complex dum=Complex();
+  Complex dum = Complex();
   for (int i = 0;i<NCOLOR;i++)
-    dum=dum+o.get(i,i);
+    dum = dum+o.get(i,i);
   return dum;
 }
 
 Umatrix real_gaussian_Umatrix() {
-  Umatrix dum=Umatrix();
+  Umatrix dum = Umatrix();
   for (int a = 0;a<RANK;a++) {
-    dum=dum+gasdev()*Lambda[a];
+    dum = dum+gasdev()*Lambda[a];
   }
   return dum;
 }
@@ -239,7 +239,7 @@ Gamma_Matrix operator *(const Gamma_Matrix &o1, const Gamma_Matrix &o2) {
     for (int j = 0;j<KDFERMION;j++) {
       dum = 0.0;
       for (int k = 0;k<KDFERMION;k++)
-        dum=dum+o1.get(i,k)*o2.get(k,j);
+        dum = dum+o1.get(i,k)*o2.get(k,j);
       r.set(i,j,dum);
     }
   }
@@ -481,7 +481,6 @@ void Site_Field::print() {
   return;
 }
 
-
 Site_Field operator +(const Site_Field &s1, const Site_Field &s2) {
   int sites = 0;
   Lattice_Vector x;
@@ -492,7 +491,6 @@ Site_Field operator +(const Site_Field &s1, const Site_Field &s2) {
 
   return dum;
 }
-
 
 Site_Field operator -(const Site_Field &s1, const Site_Field &s2) {
   int sites = 0;
@@ -516,11 +514,10 @@ Site_Field operator *(const double o, const Site_Field &s) {
   return dum;
 }
 
-
 Site_Field operator *(const Complex &o, const Site_Field &s) {
   int sites = 0;
   Lattice_Vector x;
-  Site_Field dum=Site_Field();
+  Site_Field dum = Site_Field();
 
   while (loop_over_lattice(x, sites))
     dum.set(x,o*s.get(x));
@@ -531,7 +528,7 @@ Site_Field operator *(const Complex &o, const Site_Field &s) {
 Umatrix operator *(const Site_Field &s1, const Site_Field &s2) {
   int sites = 0;
   Lattice_Vector x;
-  Umatrix dum=Umatrix();
+  Umatrix dum = Umatrix();
 
   while (loop_over_lattice(x, sites))
     dum = dum + s1.get(x) * s2.get(x);
@@ -551,11 +548,10 @@ Site_Field Adj(const Site_Field &l) {
   return dum;
 }
 
-
 Site_Field comm(const Site_Field &phi, const Site_Field &S) {
   Lattice_Vector x;
   int sites;
-  Site_Field dum=Site_Field();
+  Site_Field dum = Site_Field();
   sites = 0;
   while (loop_over_lattice(x, sites))
     dum.set(x, phi.get(x) * S.get(x) - S.get(x) * phi.get(x));
@@ -587,7 +583,7 @@ Site_Field Dplus(const Gauge_Field &U, const Site_Field &s) {
 Site_Field Dminus(const Gauge_Field &U, const Site_Field &L) {
   Lattice_Vector x,e_mu;
   int mu,sites;
-  Site_Field dum=Site_Field();
+  Site_Field dum = Site_Field();
   Umatrix tmp;
   Gauge_Field Udag;
 

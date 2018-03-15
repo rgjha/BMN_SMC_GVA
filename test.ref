@@ -31,31 +31,31 @@ Umom 3.12485 Xmom 45.0079
 boson 4.82707 so3 0.00110408 so6 0.000461444 Myers -0.0124267
 Action at beginning traj 4.8231
 H at beginning traj 52.9558
-boson 10.4324 so3 0.0028764 so6 0.0016763 Myers -0.11906
-Umom 2.37044 Xmom 40.3017
-Action at end of traj 10.3415
-H at end of traj 53.0136
-ACCEPTED with deltaH of 0.0577712
+boson 10.0317 so3 0.00303808 so6 0.00171202 Myers -0.0786738
+Umom 2.25414 Xmom 40.7229
+Action at end of traj 9.98009
+H at end of traj 52.9571
+ACCEPTED with deltaH of 0.00126542
 sweep no. 1
 -------------*****--------------
 Umom 10.1735 Xmom 45.275
-Action at beginning traj 10.3415
-H at beginning traj 65.79
-boson 16.1423 so3 0.0107399 so6 0.00138203 Myers -0.0631906
-Umom 5.28226 Xmom 44.2426
-Action at end of traj 16.1125
-H at end of traj 65.6374
-ACCEPTED with deltaH of -0.152542
+Action at beginning traj 9.98009
+H at beginning traj 65.4286
+boson 16.0936 so3 0.0111865 so6 0.0013806 Myers -0.00137974
+Umom 5.65437 Xmom 43.649
+Action at end of traj 16.1261
+H at end of traj 65.4294
+ACCEPTED with deltaH of 0.000802951
 sweep no. 2
 -------------*****--------------
 Umom 5.89322 Xmom 52.1988
-Action at beginning traj 16.1125
-H at beginning traj 74.2046
-boson 25.0175 so3 0.00515257 so6 0.00451688 Myers 0.0881662
-Umom 4.34086 Xmom 44.3592
-Action at end of traj 25.1479
-H at end of traj 73.8479
-ACCEPTED with deltaH of -0.356653
+Action at beginning traj 16.1261
+H at beginning traj 74.2181
+boson 25.6477 so3 0.00586002 so6 0.00453152 Myers 0.0649991
+Umom 4.28024 Xmom 44.1968
+Action at end of traj 25.7571
+H at end of traj 74.2342
+ACCEPTED with deltaH of 0.0161043
 sweep no. 3
 
-Runtime: 1358 msec
+Runtime: 1332 msec

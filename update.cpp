@@ -36,7 +36,7 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
     if (f_hmc.bad())
       cout << "failed to open hmc_test file\n" << flush;
 
-    S_old=action(U, phi, F);
+    S_old = action(U, phi, F);
     //cout << "computed action\n" << flush;
 
     force(U, f_U, phi, f_phi, F, f_F);
@@ -44,8 +44,8 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   }
   //cout << "sold is " << S_old << "\n";
 
-  if ((no_calls%100==0)&&(!first_time)) {
-    cout << "acceptance rate " << (double)accept/(double)no_calls << "\n" << flush;
+  if ((no_calls % 100 == 0) && (!first_time)) {
+    cout << "acceptance rate " << (double)accept / (double)no_calls << "\n" << flush;
     no_calls = 0;
     accept = 0;
   }
@@ -64,10 +64,9 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
   for (i = 0; i < NFERMION; i++)
     old_f_F[i] = f_F[i];
 
-    
   cout << "Action at beginning traj " << S_old << "\n" << flush;
   cout << "H at beginning traj " << H_old << "\n" << flush;
-    
+
   // MD evolution
   for (i = 0; i < TRAJECTORY_LENGTH; i++)
     evolve_fields(U, p_U, f_U, phi, p_phi, f_phi, F, p_F, f_F);

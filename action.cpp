@@ -47,7 +47,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
 
   // BMN mass terms -mu^2/9  Tr[phi_i phi_i] for i = 0, 1, 2
   //                -mu^2/36 Tr[phi_i phi_i] for i = 3, 4, 5, 6, 7, 8
-  td = BETA * MU * MU / 9.0 ;
+  td = BETA * MU * MU / 9.0;
   for (i = 0; i < 3; i++) {
     site = 0;
     while (loop_over_lattice(x, site))
@@ -55,7 +55,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
       so3 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
   }
 
-  td = BETA * MU * MU/36.0 ;
+  td = BETA * MU * MU / 36.0;
   for (i = 3; i < NSCALAR; i++) {
     site = 0;
     while (loop_over_lattice(x, site))
@@ -63,8 +63,8 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
       so6 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
   }
 
-  // Cubic term (-sqrt(8) mu/3) epsilon_ijk phi_i phi_j phi_k
-  td = BETA * 2.0 * sqrt(2.0) * MU / 3.0;
+  // Cubic term (-sqrt(8) mu / 3) epsilon_ijk phi_i phi_j phi_k
+  td = BETA * sqrt(2.0) * MU / 1.5;
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
         if (i == j)
