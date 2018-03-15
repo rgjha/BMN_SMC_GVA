@@ -27,6 +27,6 @@ double kinetic_energy(const Gauge_Field &p_U, const Site_Field p_phi[],
       dum = dum + Tr(Adj(p_F[i]) * p_F[i]);
   }
 
-  cout << "Umom " << Umom << " Xmom " << Xmom << "\n" << flush;
+  cout << "Umom " << Umom << " Xmom " << Xmom << endl;
   return dum.real();
 }

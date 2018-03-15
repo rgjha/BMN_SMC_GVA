@@ -141,15 +141,16 @@ Umatrix operator *(const double o2, const Umatrix &o1) {
     for (int j = 0;j<NCOLOR;j++)
       dum.set(i,j,o1.get(i,j)*o2);
   }
-  return dum;}
-  Umatrix operator +(const Umatrix &x, const Umatrix &y) {
-    Umatrix dum;
-    for (int i = 0;i<NCOLOR;i++) {
-      for (int j = 0;j<NCOLOR;j++)
-        dum.set(i,j,x.get(i,j)+y.get(i,j));
-    }
-    return dum;
+  return dum;
+}
+Umatrix operator +(const Umatrix &x, const Umatrix &y) {
+  Umatrix dum;
+  for (int i = 0;i<NCOLOR;i++) {
+    for (int j = 0;j<NCOLOR;j++)
+      dum.set(i,j,x.get(i,j)+y.get(i,j));
   }
+  return dum;
+}
 Umatrix operator -(const Umatrix &x, const Umatrix &y) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++)
@@ -176,7 +177,7 @@ Umatrix exp(const Umatrix &u) {
     del=prod*(1.0/fac);
     c=c+del;
     i++;}
-  while(sqrt(Tr(del*Adj(del)).real())>GAUGETOL);
+  while (sqrt(Tr(del*Adj(del)).real())>GAUGETOL);
 
   sum+=i;
   counter++;
@@ -185,14 +186,15 @@ Umatrix exp(const Umatrix &u) {
       << (double)sum/counter << "\n" << flush;
     counter = 0;sum = 0;}
 
-  return(c);}
+  return(c);
+}
 
-  Complex Tr(const Umatrix &o) {
-    Complex dum=Complex();
-    for (int i = 0;i<NCOLOR;i++)
-      dum=dum+o.get(i,i);
-    return dum;
-  }
+Complex Tr(const Umatrix &o) {
+  Complex dum=Complex();
+  for (int i = 0;i<NCOLOR;i++)
+    dum=dum+o.get(i,i);
+  return dum;
+}
 
 Umatrix real_gaussian_Umatrix() {
   Umatrix dum=Umatrix();
@@ -204,7 +206,9 @@ Umatrix real_gaussian_Umatrix() {
 
 Gamma_Matrix::Gamma_Matrix() {
   for (int i = 0;i<KDFERMION;i++) {
-    for (int j = 0;j<KDFERMION;j++) {gam[i][j] = 0.0;}}
+    for (int j = 0;j<KDFERMION;j++)
+      gam[i][j] = 0.0;
+  }
 }
 
 Gamma_Matrix::Gamma_Matrix(int k) {
@@ -297,7 +301,7 @@ double BC(const Lattice_Vector &x, const Lattice_Vector &y) {
   if (x.get(D-1)+y.get(D-1)<0) return(PBC);
   if (x.get(D-1)+y.get(D-1)>(T-1))return(PBC);
 
-  return(1.0);
+  return 1.0;
 }
 
 int loop_over_lattice(Lattice_Vector &x, int &site) {
@@ -310,7 +314,6 @@ int loop_over_lattice(Lattice_Vector &x, int &site) {
       Lattice_Map[i]=(int)pow((double)L,(double)i);
     first_time = 0;
   }
-
 
   current = site;
   for (i = D - 1; i >= 0; i--) {
@@ -405,9 +408,9 @@ Gauge_Field Adj(const Gauge_Field & U) {
   int site;
   Gauge_Field W;
   Lattice_Vector x;
-  for (int mu = 0;mu<D;mu++) {
+  for (int mu = 0; mu < D; mu++) {
     site = 0;
-    while(loop_over_lattice(x,site))
+    while (loop_over_lattice(x,site))
       W.set(x,mu,Adj(U.get(x,mu)));
   }
   return W;
@@ -484,7 +487,7 @@ Site_Field operator +(const Site_Field &s1, const Site_Field &s2) {
   Lattice_Vector x;
   Site_Field dum = Site_Field();
 
-  while(loop_over_lattice(x, sites))
+  while (loop_over_lattice(x, sites))
     dum.set(x, s1.get(x) + s2.get(x));
 
   return dum;
@@ -496,7 +499,7 @@ Site_Field operator -(const Site_Field &s1, const Site_Field &s2) {
   Lattice_Vector x;
   Site_Field dum = Site_Field();
 
-  while(loop_over_lattice(x, sites))
+  while (loop_over_lattice(x, sites))
     dum.set(x,s1.get(x)-s2.get(x));
 
   return dum;
@@ -505,11 +508,10 @@ Site_Field operator -(const Site_Field &s1, const Site_Field &s2) {
 Site_Field operator *(const double o, const Site_Field &s) {
   int sites = 0;
   Lattice_Vector x;
-  Site_Field dum=Site_Field();
+  Site_Field dum = Site_Field();
 
-  while(loop_over_lattice(x, sites)) {
-    dum.set(x,o*s.get(x));
-  }
+  while (loop_over_lattice(x, sites))
+    dum.set(x, o * s.get(x));
 
   return dum;
 }
@@ -520,9 +522,8 @@ Site_Field operator *(const Complex &o, const Site_Field &s) {
   Lattice_Vector x;
   Site_Field dum=Site_Field();
 
-  while(loop_over_lattice(x, sites)) {
+  while (loop_over_lattice(x, sites))
     dum.set(x,o*s.get(x));
-  }
 
   return dum;
 }
@@ -532,9 +533,9 @@ Umatrix operator *(const Site_Field &s1, const Site_Field &s2) {
   Lattice_Vector x;
   Umatrix dum=Umatrix();
 
-  while(loop_over_lattice(x, sites)) {
-    dum=dum+s1.get(x)*s2.get(x);
-  }
+  while (loop_over_lattice(x, sites))
+    dum = dum + s1.get(x) * s2.get(x);
+
   return dum;
 }
 
@@ -544,8 +545,8 @@ Site_Field Adj(const Site_Field &l) {
   Site_Field dum;
 
   sites = 0;
-  while(loop_over_lattice(x, sites)) {
-    dum.set(x,Adj(l.get(x)));}
+  while (loop_over_lattice(x, sites))
+    dum.set(x,Adj(l.get(x)));
 
   return dum;
 }
@@ -556,35 +557,30 @@ Site_Field comm(const Site_Field &phi, const Site_Field &S) {
   int sites;
   Site_Field dum=Site_Field();
   sites = 0;
-  while(loop_over_lattice(x, sites)) {
-    dum.set(x,phi.get(x)*S.get(x)-S.get(x)*phi.get(x));
-  }
+  while (loop_over_lattice(x, sites))
+    dum.set(x, phi.get(x) * S.get(x) - S.get(x) * phi.get(x));
+
   return dum;
 }
 
-
-
-
-
 Site_Field Dplus(const Gauge_Field &U, const Site_Field &s) {
-  Lattice_Vector x,e_mu;
+  Lattice_Vector x, e_mu;
   int mu,sites;
-  Site_Field dum=Site_Field();
+  Site_Field dum = Site_Field();
   Umatrix tmp;
   Gauge_Field Udag;
-  Udag=Adj(U);
+  Udag = Adj(U);
 
   // computes covariant finite difference on adjoint site field
 
   sites = 0;
-  while(loop_over_lattice(x, sites)) {
-    for (mu = 0;mu<D;mu++) {
+  while (loop_over_lattice(x, sites)) {
+    for (mu = 0; mu < D; mu++) {
       e_mu=Lattice_Vector(mu);
       tmp=U.get(x,mu)*s.get(x+e_mu)*Udag.get(x,mu)*BC(x,e_mu)-s.get(x);
       dum.set(x,tmp);
-    }}
-
-
+    }
+  }
   return dum;
 }
 
@@ -598,16 +594,15 @@ Site_Field Dminus(const Gauge_Field &U, const Site_Field &L) {
   Udag=Adj(U);
 
   sites = 0;
-  while(loop_over_lattice(x, sites)) {
+  while (loop_over_lattice(x, sites)) {
     tmp=Umatrix();
 
-    for (mu = 0;mu<D;mu++) {
-      e_mu=Lattice_Vector(mu);
+    for (mu = 0; mu < D; mu++) {
+      e_mu = Lattice_Vector(mu);
 
-      tmp=tmp+L.get(x)-
-        Udag.get(x-e_mu,mu)*L.get(x-e_mu)*U.get(x-e_mu,mu)*BC(x,-e_mu);
+      tmp = tmp + L.get(x)
+                - Udag.get(x - e_mu, mu) * L.get(x - e_mu) * U.get(x - e_mu, mu) * BC(x, -e_mu);
     }
-
     dum.set(x, tmp);
   }
   return dum;

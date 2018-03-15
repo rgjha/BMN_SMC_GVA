@@ -27,47 +27,35 @@ Commencing measurement sweeps
 Updated DT is 0.025
 Got seed 41 from user input
 -------------*****--------------
-KE = (Umom + Xmom) = 3.12485 + 45.0079
-boson 4.82707
-so3 0.00110408
-so6 0.000461444
-Myers -0.0124267
+Umom 3.12485 Xmom 45.0079
+boson 4.82707 so3 0.00110408 so6 0.000461444 Myers -0.0124267
 Action at beginning traj 4.8231
 H at beginning traj 52.9558
-boson 10.4324
-so3 0.0028764
-so6 0.0016763
-Myers -0.11906
-KE = (Umom + Xmom) = 2.37044 + 40.3017
+boson 10.4324 so3 0.0028764 so6 0.0016763 Myers -0.11906
+Umom 2.37044 Xmom 40.3017
 Action at end of traj 10.3415
 H at end of traj 53.0136
 ACCEPTED with deltaH of 0.0577712
 sweep no. 1
 -------------*****--------------
-KE = (Umom + Xmom) = 10.1735 + 45.275
+Umom 10.1735 Xmom 45.275
 Action at beginning traj 10.3415
 H at beginning traj 65.79
-boson 16.1423
-so3 0.0107399
-so6 0.00138203
-Myers -0.0631906
-KE = (Umom + Xmom) = 5.28226 + 44.2426
+boson 16.1423 so3 0.0107399 so6 0.00138203 Myers -0.0631906
+Umom 5.28226 Xmom 44.2426
 Action at end of traj 16.1125
 H at end of traj 65.6374
 ACCEPTED with deltaH of -0.152542
 sweep no. 2
 -------------*****--------------
-KE = (Umom + Xmom) = 5.89322 + 52.1988
+Umom 5.89322 Xmom 52.1988
 Action at beginning traj 16.1125
 H at beginning traj 74.2046
-boson 25.0175
-so3 0.00515257
-so6 0.00451688
-Myers 0.0881662
-KE = (Umom + Xmom) = 4.34086 + 44.3592
+boson 25.0175 so3 0.00515257 so6 0.00451688 Myers 0.0881662
+Umom 4.34086 Xmom 44.3592
 Action at end of traj 25.1479
 H at end of traj 73.8479
 ACCEPTED with deltaH of -0.356653
 sweep no. 3
 
-Runtime: 1483 msec
+Runtime: 1358 msec
