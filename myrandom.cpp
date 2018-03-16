@@ -1,8 +1,14 @@
 #include "myrandom.h"
 #include "utilities.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/time.h>
+
+#define MBIG 1000000000
+#define MSEED 161803398
+#define MZ 0
+#define FAC (1.0/MBIG)
 
 unsigned int random_seed() {
   unsigned int seed;
@@ -26,23 +32,15 @@ unsigned int random_seed() {
     fclose(devrandom);
   }
 
-  return(seed);
+  return seed;
 }
 
-
-#include <stdlib.h>
-
-#define MBIG 1000000000
-#define MSEED 161803398
-#define MZ 0
-#define FAC (1.0/MBIG)
-
 double ran3(long *idum) {
-  static int inext,inextp;
+  static int inext, inextp;
   static long ma[56];
-  static int iff=0;
-  long mj,mk;
-  int i,ii,k;
+  static int iff = 0;
+  long mj, mk;
+  int i, ii, k;
 
   if (*idum < 0 || iff == 0) {
     iff=1;

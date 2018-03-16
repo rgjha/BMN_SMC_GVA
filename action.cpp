@@ -4,9 +4,9 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
               const Site_Field F[NFERMION]) {
 
   int mu, nu, site, i, j, k, n;
-  double act_s = 0.0, act_F = 0.0, td;
+  double act_s = 0.0, act_F = 0.0, td, td2;
   double boson = 0.0, Myers = 0.0, so3 = 0.0, so6 = 0.0;
-  Lattice_Vector x,e_mu;
+  Lattice_Vector x, e_mu;
   Umatrix tU;
   Gauge_Field Udag;
   Site_Field sol[NFERMION][DEGREE],psol[NFERMION][DEGREE];    // NFERMION = 16
@@ -50,17 +50,21 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
   td = BETA * MU * MU / 9.0;
   for (i = 0; i < 3; i++) {
     site = 0;
-    while (loop_over_lattice(x, site))
-      act_s = act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
-      so3 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+    while (loop_over_lattice(x, site)) {
+      td2 = td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+      act_s = act_s - td2;
+      so3 = so3 - td2;
+    }
   }
 
   td = BETA * MU * MU / 36.0;
   for (i = 3; i < NSCALAR; i++) {
     site = 0;
-    while (loop_over_lattice(x, site))
-      act_s = act_s - td * Tr(phi[i].get(x) * phi[i].get(x)).real();
-      so6 -= td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+    while (loop_over_lattice(x, site)) {
+      td2 = td * Tr(phi[i].get(x) * phi[i].get(x)).real();
+      act_s = act_s - td2;
+      so6 = so6 - td2;
+    }
   }
 
   // Cubic term (-sqrt(8) mu / 3) epsilon_ijk phi_i phi_j phi_k
@@ -75,8 +79,9 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
         site = 0;
         while (loop_over_lattice(x, site)) {
           tU = phi[i].get(x) * phi[j].get(x) * phi[k].get(x);
-          act_s = act_s - td * epsilon[i][j][k] * Tr(tU).real();
-          Myers -= td * epsilon[i][j][k] * Tr(tU).real();
+          td2 = td * epsilon[i][j][k] * Tr(tU).real();
+          act_s = act_s - td2;
+          Myers = Myers - td2;
         }
       }
     }

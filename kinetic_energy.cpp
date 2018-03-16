@@ -23,7 +23,7 @@ double kinetic_energy(const Gauge_Field &p_U, const Site_Field p_phi[],
   Xmom = dum.real() - Umom;
 
   if (FERMIONS) {
-    for (i = 0; i < NFERMION; i++)  // !?
+    for (i = 0; i < NFERMION; i++)
       dum = dum + Tr(Adj(p_F[i]) * p_F[i]);
   }
 

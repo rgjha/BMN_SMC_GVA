@@ -36,22 +36,23 @@ Complex pow(const Complex &o1, const int o2) {
 
 // unitary matrix type Umatrix
 Umatrix::Umatrix() {
-  for (int i = 0;i<NCOLOR;i++) {
-    for (int j = 0;j<NCOLOR;j++)
-      mat[i][j]=Complex();
+  for (int i = 0; i < NCOLOR; i++) {
+    for (int j = 0; j < NCOLOR; j++)
+      mat[i][j] = Complex();
   }
 }
 
 Umatrix::Umatrix(int k) {
-  if (k==1) {
-    for (int i = 0;i<NCOLOR;i++) {
-      for (int j = 0;j<NCOLOR;j++) {mat[i][j]=Complex();}
-    }
-    for (int n = 0;n<NCOLOR;n++) {
-      mat[n][n]=Complex(1.0,0.0);}
-  }
-  else {cout << "wrong Umatrix constructor\n" << flush; }
+  if (k == 1) {
+    for (int i = 0; i < NCOLOR; i++) {
+      for (int j = 0; j < NCOLOR; j++)
+        mat[i][j] = Complex();
 
+      mat[i][i] = Complex(1.0, 0.0);
+    }
+  }
+  else
+    cout << "wrong Umatrix constructor\n" << flush;
 }
 
 Umatrix::Umatrix(Complex m[NCOLOR][NCOLOR]) {
@@ -191,22 +192,23 @@ Umatrix exp(const Umatrix &u) {
 
 Complex Tr(const Umatrix &o) {
   Complex dum = Complex();
-  for (int i = 0;i<NCOLOR;i++)
-    dum = dum+o.get(i,i);
+  for (int i = 0; i < NCOLOR; i++)
+    dum = dum + o.get(i, i);
+
   return dum;
 }
 
 Umatrix real_gaussian_Umatrix() {
   Umatrix dum = Umatrix();
-  for (int a = 0;a<RANK;a++) {
-    dum = dum+gasdev()*Lambda[a];
-  }
+  for (int a = 0; a < RANK; a++)
+    dum = dum + gasdev() * Lambda[a];
+
   return dum;
 }
 
 Gamma_Matrix::Gamma_Matrix() {
-  for (int i = 0;i<KDFERMION;i++) {
-    for (int j = 0;j<KDFERMION;j++)
+  for (int i = 0; i < KDFERMION; i++) {
+    for (int j = 0; j < KDFERMION; j++)
       gam[i][j] = 0.0;
   }
 }
@@ -426,7 +428,7 @@ Site_Field::Site_Field(int c) {
   if (c == 2) {
     for (int i = 0; i < SITES; i++) {
       points[i] = real_gaussian_Umatrix()
-                + Complex(0.0,1.0) * real_gaussian_Umatrix();
+                + Complex(0.0, 1.0) * real_gaussian_Umatrix();
       points[i] = (1.0 / sqrt(2.0)) * points[i];
     }
   }
@@ -438,20 +440,20 @@ Site_Field::Site_Field(int c) {
 }
 
 Umatrix Site_Field::get(const Lattice_Vector &x) const{
-  int site = 0,i;
-  static int first_time=1;
+  int site = 0, i;
+  static int first_time = 1;
   static int Lattice_Map[D];
 
   if (first_time) {
     for (i = 0; i < D; i++)
-      Lattice_Map[i]=(int)pow((double)L,(double)i);
+      Lattice_Map[i] = (int)pow((double)L, (double)i);
     first_time = 0;
   }
 
   for (i = 0; i < D; i++)
-    site=site+x.get(i)*Lattice_Map[i];
+    site = site + x.get(i) * Lattice_Map[i];
 
-  return(points[site]);
+  return (points[site]);
 }
 
 void Site_Field::set(const Lattice_Vector &x, const Umatrix &u) {
