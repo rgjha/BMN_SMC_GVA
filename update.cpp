@@ -1,4 +1,3 @@
-
 #include "update.h"
 
 void update(Gauge_Field &U, Site_Field phi[NSCALAR],
@@ -19,7 +18,7 @@ void update(Gauge_Field &U, Site_Field phi[NSCALAR],
 
   no_calls++;
 
-  // refresh momenta
+  // Refresh momenta
   p_U = Gauge_Field(2);
 
   for (i = 0; i < NSCALAR; i++)

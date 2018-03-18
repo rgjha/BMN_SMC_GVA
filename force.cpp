@@ -14,6 +14,7 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
   Umatrix tmp, tU;
 
   // Gauge force -- scalar contribution
+  //   -2X(t) U(t) X(t+1) Udag(t)
   Udag = Adj(U);
   sites = 0;
   while (loop_over_lattice(x, sites)) {

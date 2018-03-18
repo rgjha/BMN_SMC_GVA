@@ -8,21 +8,21 @@ double Complex::imag() const{return(im);}
 double Complex::norm() {return(sqrt(re*re+im*im));}
 void Complex::print() const {cout << "("<< re << ", " << im << ")";}
 
-ostream& operator<<(ostream& out,Complex c) {
-  out<<c.real()<<"\t"<<c.imag();
+ostream& operator<<(ostream& out, Complex c) {
+  out << c.real() << "\t" << c.imag();
   return out;
 }
-istream& operator>>(istream& in,Complex & c) {
-  double x,y;
-  in>>x>>y;
-  c=Complex(x,y);
+istream& operator>>(istream& in, Complex & c) {
+  double x, y;
+  in >> x >> y;
+  c = Complex(x, y);
   return in;
 }
 
 Complex operator /(const Complex &o1, const Complex &o2) {
   Complex dum;
   double norm;
-  norm=o2.real()*o2.real()+o2.imag()*o2.imag();
+  norm = o2.real()*o2.real()+o2.imag()*o2.imag();
   dum = Complex((o1.real()*o2.real()+o1.imag()*o2.imag())/norm,
       (o1.imag()*o2.real()-o1.real()*o2.imag())/norm);
   return dum;
@@ -30,7 +30,8 @@ Complex operator /(const Complex &o1, const Complex &o2) {
 
 Complex pow(const Complex &o1, const int o2) {
   Complex c(1,0);
-  for (int i = 0;i<o2;i++) c=c*o1;
+  for (int i = 0; i < o2; i++)
+    c = c * o1;
   return c;
 }
 
@@ -62,12 +63,11 @@ Umatrix::Umatrix(Complex m[NCOLOR][NCOLOR]) {
   }
 }
 
-
 Complex Umatrix::get(int i, int j) const {return(mat[i][j]);}
 void Umatrix::set(int i, int j, const Complex o) {mat[i][j]=o;}
 void Umatrix::print() {
-  for (int i = 0;i<NCOLOR;i++) {
-    for (int j = 0;j<NCOLOR;j++) {
+  for (int i = 0; i < NCOLOR; i++) {
+    for (int j = 0; j < NCOLOR; j++) {
       mat[i][j].print();
       cout << "\t";
     }
@@ -78,7 +78,7 @@ Umatrix Adj(const Umatrix &u) {
   Umatrix res;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      res.set(i,j,conjug(u.get(j,i)));
+      res.set(i, j,conjug(u.get(j,i)));
   }
   return(res);
 }
@@ -86,7 +86,7 @@ Umatrix Adj(const Umatrix &u) {
 ostream& operator<<(ostream& out,Umatrix s) {
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      out<<s.get(i,j)<<'\t';
+      out<<s.get(i, j)<<'\t';
   }
   return out;
 }
@@ -106,8 +106,8 @@ Umatrix operator *(const Umatrix &o1, const Umatrix &o2) {
     for (int j = 0;j<NCOLOR;j++) {
       dum = Complex();
       for (int k = 0;k<NCOLOR;k++)
-        dum = dum+o1.get(i,k)*o2.get(k,j);
-      r.set(i,j,dum);
+        dum = dum+o1.get(i,k)*o2.get(k, j);
+      r.set(i, j,dum);
     }
   return(r);
 }
@@ -116,7 +116,7 @@ Umatrix operator *(const Umatrix &o1, const Complex &o2) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,o1.get(i,j)*o2);
+      dum.set(i, j,o1.get(i, j)*o2);
   }
   return dum;
 }
@@ -124,7 +124,7 @@ Umatrix operator *(const Complex &o2, const Umatrix &o1) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,o1.get(i,j)*o2);
+      dum.set(i, j,o1.get(i, j)*o2);
   }
   return dum;
 }
@@ -132,7 +132,7 @@ Umatrix operator *(const Umatrix &o1, const double o2) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,o1.get(i,j)*o2);
+      dum.set(i, j,o1.get(i, j)*o2);
   }
   return dum;
 }
@@ -140,7 +140,7 @@ Umatrix operator *(const double o2, const Umatrix &o1) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,o1.get(i,j)*o2);
+      dum.set(i, j,o1.get(i, j)*o2);
   }
   return dum;
 }
@@ -148,7 +148,7 @@ Umatrix operator +(const Umatrix &x, const Umatrix &y) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++) {
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,x.get(i,j)+y.get(i,j));
+      dum.set(i, j,x.get(i, j)+y.get(i, j));
   }
   return dum;
 }
@@ -156,7 +156,7 @@ Umatrix operator -(const Umatrix &x, const Umatrix &y) {
   Umatrix dum;
   for (int i = 0;i<NCOLOR;i++)
     for (int j = 0;j<NCOLOR;j++)
-      dum.set(i,j,x.get(i,j)-y.get(i,j));
+      dum.set(i, j,x.get(i, j)-y.get(i, j));
   return dum;
 }
 
@@ -165,29 +165,30 @@ Umatrix comm(const Umatrix &o1, const Umatrix &o2) {
 }
 
 Umatrix exp(const Umatrix &u) {
-  Umatrix c,del,prod;
-  double fac=1.0;
-  int i=1;
-  prod=Umatrix(1);
-  c=Umatrix(1);
-  static int sum = 0,counter = 0;
+  Umatrix c, del, prod;
+  double fac = 1.0;
+  int i = 1;
+  prod = Umatrix(1);
+  c = Umatrix(1);
+  static int sum = 0, counter = 0;
 
-  do{
-    fac=fac*(double)i;
-    prod=prod*u;
-    del=prod*(1.0/fac);
-    c=c+del;
-    i++;}
-  while (sqrt(Tr(del*Adj(del)).real())>GAUGETOL);
+  do {
+    fac = fac * (double)i;
+    prod = prod * u;
+    del = prod * (1.0 / fac);
+    c = c + del;
+    i++;
+  } while (sqrt(Tr(del * Adj(del)).real()) > GAUGETOL && i < 8);  // !!!
 
-  sum+=i;
+  sum += i;
   counter++;
-  if (counter==1000) {
+  if (counter == 1000) {
     cout << "mean no. of terms in exp() "
-      << (double)sum/counter << "\n" << flush;
-    counter = 0;sum = 0;}
-
-  return(c);
+         << (double)sum/counter << "\n" << flush;
+    counter = 0;
+    sum = 0;
+  }
+  return c;
 }
 
 Complex Tr(const Umatrix &o) {
@@ -214,20 +215,24 @@ Gamma_Matrix::Gamma_Matrix() {
 }
 
 Gamma_Matrix::Gamma_Matrix(int k) {
-  if (k==1) {
-    for (int i = 0;i<KDFERMION;i++) {
-      for (int j = 0;j<KDFERMION;j++) {gam[i][j] = 0.0;}
+  if (k == 1) {
+    for (int i = 0; i < KDFERMION; i++) {
+      for (int j = 0; j < KDFERMION; j++)
+        gam[i][j] = 0.0;
+
+      gam[i][i]=1.0;
     }
-    for (int n = 0;n<KDFERMION;n++) {
-      gam[n][n]=1.0;}
   }
-  else {
+  else
     cout << "wrong Gamma_Matrix constructor\n" << flush;
-  }
 }
 
-double Gamma_Matrix::get(int i, int j) const {return(gam[i][j]);}
-void Gamma_Matrix::set(int i, int j, const double o) {gam[i][j]=o;}
+double Gamma_Matrix::get(int i, int j) const {
+  return(gam[i][j]);
+}
+void Gamma_Matrix::set(int i, int j, const double o) {
+  gam[i][j] = o;
+}
 void Gamma_Matrix::print() {
   for (int i = 0;i<KDFERMION;i++) {
     for (int j = 0;j<KDFERMION;j++) {cout << gam[i][j];cout << "\t";}
@@ -241,8 +246,8 @@ Gamma_Matrix operator *(const Gamma_Matrix &o1, const Gamma_Matrix &o2) {
     for (int j = 0;j<KDFERMION;j++) {
       dum = 0.0;
       for (int k = 0;k<KDFERMION;k++)
-        dum = dum+o1.get(i,k)*o2.get(k,j);
-      r.set(i,j,dum);
+        dum = dum+o1.get(i,k)*o2.get(k, j);
+      r.set(i, j,dum);
     }
   }
   return(r);
@@ -252,75 +257,89 @@ Gamma_Matrix operator *(const double k, const Gamma_Matrix &o) {
   Gamma_Matrix r;
   for (int i = 0;i<KDFERMION;i++) {
     for (int j = 0;j<KDFERMION;j++)
-      r.set(i,j,k*o.get(i,j));
+      r.set(i, j,k*o.get(i, j));
   }
   return(r);
 }
 
 Gamma_Matrix operator +(const Gamma_Matrix &o1, const Gamma_Matrix &o2) {
   Gamma_Matrix r;
-  for (int i = 0;i<KDFERMION;i++) {
-    for (int j = 0;j<KDFERMION;j++)
-      r.set(i,j,o1.get(i,j)+o2.get(i,j));
+  for (int i = 0; i < KDFERMION; i++) {
+    for (int j = 0; j < KDFERMION; j++)
+      r.set(i, j, o1.get(i, j)+o2.get(i, j));
   }
   return(r);
 }
 
-Lattice_Vector::Lattice_Vector() {for (int i = 0; i < D; i++)coords[i] = 0;}
-Lattice_Vector::Lattice_Vector(int mu) {for (int i = 0; i < D; i++){
-  coords[i] = 0;}coords[mu]=1;}
-  void Lattice_Vector::set(int i, int a) {
-    coords[i]=a;
-    return;}
-    int Lattice_Vector::get(int i) const{
-      return(coords[i]);}
-      void Lattice_Vector::print() const {
-        for (int i = 0; i < D; i++) {cout << coords[i] << "\t";} cout << "\n";}
+Lattice_Vector::Lattice_Vector() {
+  for (int i = 0; i < D; i++)
+    coords[i] = 0;
+}
+Lattice_Vector::Lattice_Vector(int mu) {
+  for (int i = 0; i < D; i++)
+    coords[i] = 0;
+  coords[mu] = 1;
+}
+void Lattice_Vector::set(int i, int a) {
+  coords[i] = a;
+  return;
+}
+int Lattice_Vector::get(int i) const{
+  return(coords[i]);
+}
+void Lattice_Vector::print() const {
+  for (int i = 0; i < D; i++)
+    cout << coords[i] << "\t";
+  cout << "\n";
+}
 
-        Lattice_Vector operator +(const Lattice_Vector &x, const Lattice_Vector &y) {
-          Lattice_Vector dum;
-          for (int i = 0;i<(D-1);i++)
-            dum.set(i,(x.get(i)+y.get(i))%L);
-          dum.set(D-1,(x.get(D-1)+y.get(D-1))%T);
-          return dum;}
+Lattice_Vector operator +(const Lattice_Vector &x, const Lattice_Vector &y) {
+  Lattice_Vector dum;
+  for (int i = 0;i<(D-1);i++)
+    dum.set(i,(x.get(i)+y.get(i))%L);
+  dum.set(D-1,(x.get(D-1)+y.get(D-1))%T);
+  return dum;
+}
 
-          Lattice_Vector operator -(const Lattice_Vector &x, const Lattice_Vector &y) {
-            Lattice_Vector dum;
-            for (int i = 0;i<(D-1);i++)
-              dum.set(i,(x.get(i)-y.get(i)+L)%L);
-            dum.set(D-1,(x.get(D-1)-y.get(D-1)+T)%T);
-            return dum;}
+Lattice_Vector operator -(const Lattice_Vector &x, const Lattice_Vector &y) {
+  Lattice_Vector dum;
+  for (int i = 0;i<(D-1);i++)
+    dum.set(i,(x.get(i)-y.get(i)+L)%L);
+  dum.set(D-1,(x.get(D-1)-y.get(D-1)+T)%T);
+  return dum;
+}
 
-            Lattice_Vector operator -(const Lattice_Vector &x) {
-              Lattice_Vector dum;
-              for (int i = 0; i < D; i++)
-                dum.set(i,-1*x.get(i));
-              return dum;
-            }
+Lattice_Vector operator -(const Lattice_Vector &x) {
+  Lattice_Vector dum;
+  for (int i = 0; i < D; i++)
+    dum.set(i,-1*x.get(i));
+  return dum;
+}
 
 double BC(const Lattice_Vector &x, const Lattice_Vector &y) {
-
-  if (x.get(D-1)+y.get(D-1)<0) return(PBC);
-  if (x.get(D-1)+y.get(D-1)>(T-1))return(PBC);
+  if (x.get(D - 1) + y.get(D - 1) < 0)
+    return PBC;
+  if (x.get(D - 1) + y.get(D - 1) > (T - 1))
+    return PBC;
 
   return 1.0;
 }
 
 int loop_over_lattice(Lattice_Vector &x, int &site) {
-  int test,i,current;
+  int i, test, current;
   static int Lattice_Map[D];
-  static int first_time=1;
+  static int first_time = 1;
 
   if (first_time) {
     for (i = 0; i < D; i++)
-      Lattice_Map[i]=(int)pow((double)L,(double)i);
+      Lattice_Map[i] = (int)pow((double)L, (double)i);
     first_time = 0;
   }
 
   current = site;
   for (i = D - 1; i >= 0; i--) {
-    x.set(i,current/Lattice_Map[i]);
-    current=current-Lattice_Map[i]*x.get(i);
+    x.set(i, current / Lattice_Map[i]);
+    current = current - Lattice_Map[i] * x.get(i);
   }
 
   if (current != 0)

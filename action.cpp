@@ -5,7 +5,7 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
 
   int mu, nu, site, i, j, k, n;
   double act_s = 0.0, act_F = 0.0, td, td2;
-  double boson = 0.0, Myers = 0.0, so3 = 0.0, so6 = 0.0;
+  double Myers = 0.0, so3 = 0.0, so6 = 0.0;
   Lattice_Vector x, e_mu;
   Umatrix tU;
   Gauge_Field Udag;
@@ -43,7 +43,6 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
       }
     }
   }
-  boson = act_s;
 
   // BMN mass terms -mu^2/9  Tr[phi_i phi_i] for i = 0, 1, 2
   //                -mu^2/36 Tr[phi_i phi_i] for i = 3, 4, 5, 6, 7, 8
@@ -86,8 +85,8 @@ double action(const Gauge_Field &U, const Site_Field phi[NSCALAR],
       }
     }
   }
-  cout << "boson " << boson << " so3 " << so3 << " so6 " << so6
-       << " Myers " << Myers << endl;
+  cout << "so3 " << so3 << " so6 " << so6 << " Myers " << Myers
+       << " boson " << act_s << endl;
 
   // Pseudofermion contribution
   if (FERMIONS) {

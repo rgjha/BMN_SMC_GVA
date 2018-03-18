@@ -28,10 +28,10 @@ Updated DT is 0.025
 Got seed 41 from user input
 -------------*****--------------
 Umom 3.12485 Xmom 45.0079
-boson 4.82707 so3 0.00478696 so6 0.00366929 Myers -0.0124267
+so3 0.00478696 so6 0.00366929 Myers -0.0124267 boson 4.8231
 Action at beginning traj 4.8231
 H at beginning traj 52.9558
-boson 10.0317 so3 0.0209933 so6 0.00606435 Myers -0.0786738
+so3 0.0209933 so6 0.00606435 Myers -0.0786738 boson 9.98009
 Umom 2.25414 Xmom 40.7229
 Action at end of traj 9.98009
 H at end of traj 52.9571
@@ -41,7 +41,7 @@ sweep no. 1
 Umom 10.1735 Xmom 45.275
 Action at beginning traj 9.98009
 H at beginning traj 65.4286
-boson 16.0936 so3 0.0254423 so6 0.00844488 Myers -0.00137974
+so3 0.0254423 so6 0.00844488 Myers -0.00137974 boson 16.1261
 Umom 5.65437 Xmom 43.649
 Action at end of traj 16.1261
 H at end of traj 65.4294
@@ -51,11 +51,11 @@ sweep no. 2
 Umom 5.89322 Xmom 52.1988
 Action at beginning traj 16.1261
 H at beginning traj 74.2181
-boson 25.6477 so3 0.0349438 so6 0.00950253 Myers 0.0649991
+so3 0.0349438 so6 0.00950253 Myers 0.0649991 boson 25.7571
 Umom 4.28024 Xmom 44.1968
 Action at end of traj 25.7571
 H at end of traj 74.2342
 ACCEPTED with deltaH of 0.0161043
 sweep no. 3
 
-Runtime: 1365 msec
+Runtime: 1428 msec
