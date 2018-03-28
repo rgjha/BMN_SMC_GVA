@@ -27,9 +27,8 @@ void force(const Gauge_Field &U, Gauge_Field &f_U, const Site_Field phi[],
         tmp = tmp + phi[i].get(x) * tU;
       }
 
-      tmp = tmp - Adj(tmp); // Can replace by 2.0 * tmp instead since Adj(tmp) = -tmp
-      // We just keep factor of 4 in the parallel code when doing forces in update_h.c
-      
+      // Make traceless anti-hermitian---with an extra factor of two
+      tmp = tmp - Adj(tmp);
       trace = Tr(tmp);
       if (trace.norm() > TRACETOL)
         tmp = tmp - (1.0 / NCOLOR) * trace * Umatrix(1);
