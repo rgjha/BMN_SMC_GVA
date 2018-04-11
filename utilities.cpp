@@ -645,8 +645,9 @@ void Fermion_operator(const Gauge_Field &U,
     const Site_Field phi[NSCALAR],
     const Site_Field K[NFERMION], Site_Field MK[NFERMION], const int sign) {
 
-  int i,a,b;
-  Site_Field Y[NFERMION],B[NFERMION];
+  int i, a, b;
+  double tr;
+  Site_Field Y[NFERMION], B[NFERMION];
 
   // If sign==1 operator returned. If sign==-1 its adjoint
 
@@ -666,18 +667,12 @@ void Fermion_operator(const Gauge_Field &U,
     B[a] = Site_Field();
     B[a + KDFERMION] = Site_Field();
     for (b = 0; b < KDFERMION; b++) {
-      B[a] = B[a] + 3 * MU * 0.25 * Gam123.get(a,b) * K[b + KDFERMION];
-      B[a + KDFERMION] = B[a + KDFERMION] - 3 * MU * 0.25 * Gam123.get(b, a) * K[b];
+      tr = 0.75 * MU * Gam123.get(a, b);   // Gam123[a][b] = Gam123[b][a]
+      if (sign == -1)
+        tr = -1.0 * tr;
+      B[a] = B[a] + tr * K[b + KDFERMION];
+      B[a + KDFERMION] = B[a + KDFERMION] - tr * K[b];
     }
-  }
-
-  if (sign == 1) {
-    for (a = 0; a < NFERMION; a++)
-      MK[a] = MK[a] + B[a];
-  }
-  else {
-    for (a = 0; a < NFERMION; a++)
-      MK[a] = MK[a] - B[a];
   }
 
   // Yukawas
@@ -690,7 +685,8 @@ void Fermion_operator(const Gauge_Field &U,
     }
   }
 
-  // Last 2 gamma's diagonal in this basis. Gamma[7]=(-I0//0I) Gamma[8]=(i0//0i)
+  // Last 2 gamma matrices are diagonal in this basis
+  // Gamma[7] = (-I 0 \\ 0 I) and Gamma[8] = ( i 0 \\ 0 i)
   for (a = 0; a < KDFERMION; a++) {
     Y[a] = Y[a] + Complex(-1.0, 0.0) * comm(phi[NSCALAR - 2], K[a]);
     Y[a+KDFERMION] = Y[a+KDFERMION]
@@ -698,8 +694,9 @@ void Fermion_operator(const Gauge_Field &U,
   }
 
   if (sign==(-1)) {
-    for (a = 0; a < NFERMION; a++) {
-      Y[a]=-1.0*Y[a];}}
+    for (a = 0; a < NFERMION; a++)
+      Y[a] = -1.0 * Y[a];
+  }
 
   for (a = 0; a < NFERMION; a++) {
     Y[a] = Y[a] + Complex(0.0, 1.0) * comm(phi[NSCALAR - 1], K[a]);
