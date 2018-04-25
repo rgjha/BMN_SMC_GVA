@@ -34,15 +34,16 @@ const Site_Field s[], const Site_Field p[]){
         tmp=tmp-
           U.get(x,mu)*s[i+KDFERMION].get(x+e_mu)*Udag.get(x,mu)*pdag[i].get(x)*BC(x,e_mu);
         tmp=tmp+
-          pdag[i].get(x)*U.get(x,mu)*s[i+KDFERMION].get(x+e_mu)*Udag.get(x,mu)*BC(x,e_mu);}
+          pdag[i].get(x)*U.get(x,mu)*s[i+KDFERMION].get(x+e_mu)*Udag.get(x,mu)*BC(x,e_mu);
+      }
 
       tmp=tmp-Adj(tmp);
 
       f_U.set(x,mu,f_U.get(x,mu)+tmp);
-    }}
+    }
+  }
 
   // Dminus term
-
   sites=0;
   while(loop_over_lattice(x,sites)){
     for (mu=0;mu<D;mu++){
@@ -63,7 +64,6 @@ const Site_Field s[], const Site_Field p[]){
   }
 
   // SU(N) case
-
   if(RANK==(NCOLOR*NCOLOR-1)){
     sites=0;
     while(loop_over_lattice(x,sites)){
@@ -74,7 +74,6 @@ const Site_Field s[], const Site_Field p[]){
   }
 
   //Yukawas ...
-
   for (i=0;i<NSCALAR-2;i++){
     for (a=0;a<KDFERMION;a++){
       for (b=0;b<KDFERMION;b++){
@@ -101,9 +100,7 @@ const Site_Field s[], const Site_Field p[]){
     }
   }
 
-
   if(RANK==(NCOLOR*NCOLOR-1)){
-
     for (i=0;i<NSCALAR;i++){
       sites=0;
       while(loop_over_lattice(x,sites)){
@@ -119,8 +116,7 @@ const Site_Field s[], const Site_Field p[]){
   }
 
   for (i=0;i<NSCALAR;i++){
-    f_phi[i]=NORM*f_phi[i];}
-
+    f_phi[i] = NORM * f_phi[i];}
 
   return;
 }

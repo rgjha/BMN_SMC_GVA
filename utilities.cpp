@@ -102,14 +102,14 @@ istream& operator>>(istream& in, Umatrix & s) {
 Umatrix operator *(const Umatrix &o1, const Umatrix &o2) {
   Umatrix r;
   Complex dum;
-  for (int i = 0;i<NCOLOR;i++)
-    for (int j = 0;j<NCOLOR;j++) {
+  for (int i = 0; i < NCOLOR; i++)
+    for (int j = 0; j < NCOLOR; j++) {
       dum = Complex();
-      for (int k = 0;k<NCOLOR;k++)
-        dum = dum+o1.get(i,k)*o2.get(k, j);
-      r.set(i, j,dum);
+      for (int k = 0; k < NCOLOR; k++)
+        dum = dum + o1.get(i, k) * o2.get(k, j);
+      r.set(i, j, dum);
     }
-  return(r);
+  return r;
 }
 
 Umatrix operator *(const Umatrix &o1, const Complex &o2) {
@@ -666,10 +666,8 @@ void Fermion_operator(const Gauge_Field &U,
   for (a = 0; a < KDFERMION; a++) {
     B[a] = Site_Field();
     B[a + KDFERMION] = Site_Field();
-    for (b = 0; b < KDFERMION; b++) {
-      tr = 0.75 * MU * Gam123.get(a, b);   // Gam123[a][b] = Gam123[b][a]
-      if (sign == -1)
-        tr = -1.0 * tr;
+    for (b = 0; b < KDFERMION; b++) {        //  Gam123[a][b] = Gam123[b][a]
+      tr = 0.75 * sign * MU * Gam123.get(a, b);   // sign = +/- 1
       B[a] = B[a] + tr * K[b + KDFERMION];
       B[a + KDFERMION] = B[a + KDFERMION] - tr * K[b];
     }
