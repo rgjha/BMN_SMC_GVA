@@ -666,7 +666,7 @@ void Fermion_operator(const Gauge_Field &U,
   for (a = 0; a < KDFERMION; a++) {
     B[a] = Site_Field();
     B[a + KDFERMION] = Site_Field();
-    for (b = 0; b < KDFERMION; b++) {        //  Gam123[a][b] = Gam123[b][a]
+    for (b = 0; b < KDFERMION; b++) {
       tr = 0.75 * sign * MU * Gam123.get(a, b);   // sign = +/- 1
       B[a] = B[a] + tr * K[b + KDFERMION];
       B[a + KDFERMION] = B[a + KDFERMION] - tr * K[b];

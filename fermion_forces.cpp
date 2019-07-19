@@ -29,7 +29,6 @@ const Site_Field s[], const Site_Field p[]){
       e_mu=Lattice_Vector(mu);
       tmp=Umatrix();
 
-
       for (i=0;i<KDFERMION;i++){
         tmp=tmp-
           U.get(x,mu)*s[i+KDFERMION].get(x+e_mu)*Udag.get(x,mu)*pdag[i].get(x)*BC(x,e_mu);
