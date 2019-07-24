@@ -26,4 +26,4 @@ else
 fi
 
 # Clean up clutter
-rm -f data dump eigen hmc_test lines parameters pfaffian scalar
+rm -f data dump eigen hmc_test lines parameters pfaffian scalar trace

@@ -4,9 +4,9 @@ void measure(const Gauge_Field &U, const Site_Field phi[],
              const Site_Field F[NFERMION]){
 
   static int first_time=1;
-  static ofstream f_data,f_av,f_eigen,f_pfaff;
+  static ofstream f_data,f_av,f_eigen,f_pfaff, f_scalar;
   double act_s,act_F,MAX,MIN;
-  double eigenvals[T][NSCALAR][NCOLOR];
+  double eigenvals[T][NSCALAR][NCOLOR], tU2;
   int sites,i,j,k;
   Lattice_Vector x;
   Site_Field G,phitmp[NSCALAR];
@@ -16,7 +16,7 @@ void measure(const Gauge_Field &U, const Site_Field phi[],
   if(first_time){
     f_data.open("data",ios::app);
     if(f_data.bad()){
-      cout << "failed to open action file\n" << flush ;}
+      cout << "failed to open action file\n" << flush;}
 
     f_av.open("scalar",ios::app);
     if(f_av.bad()){
@@ -24,11 +24,17 @@ void measure(const Gauge_Field &U, const Site_Field phi[],
 
     f_eigen.open("eigen",ios::app);
     if(f_eigen.bad()){
-      cout << "failed to open eigenvalues file\n" << flush ;}
+      cout << "failed to open eigenvalues file\n" << flush;}
 
     f_pfaff.open("pfaffian",ios::app);
     if(f_pfaff.bad()){
-      cout << "failed to open pfaffian file\n" << flush ;}
+      cout << "failed to open pfaffian file\n" << flush;}
+
+    f_scalar.open("trace",ios::app);
+    if (f_scalar.bad()) {
+      cout << "failed to open scalar trace file\n" << flush;
+    }
+
     first_time=0;
   }
 
@@ -53,10 +59,22 @@ void measure(const Gauge_Field &U, const Site_Field phi[],
   for(i=0;i<T;i++){
     for(j=0;j<NSCALAR;j++){
       for(k=0;k<NCOLOR;k++){
-        f_av << eigenvals[i][j][k] << "\t" ;}
+        f_av << eigenvals[i][j][k] << "\t";}
       f_av << "\n";}}
   f_av << flush;
 
+  for (j = 0; j < NSCALAR; j++) {
+    sites = 0;
+    tU2 = 0.0;
+    while (loop_over_lattice(x, sites)) {
+      // Add overall negative sign for prettier output
+      tU2 = tU2 - Tr(phi[j].get(x) * phi[j].get(x)).real();
+    }
+    // Normalize by number of colors and number of sites
+    tU2 = tU2 / (NCOLOR * T);
+    f_scalar << tU2 << "\t";
+  }
+  f_scalar << endl;
 
   return;
 }
