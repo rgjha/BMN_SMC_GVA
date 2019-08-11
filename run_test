@@ -6,7 +6,7 @@ rm -f susy_hmc
 g++ -O3 *.cpp -o susy_hmc -llapack -lblas
 
 # Set up parameters file same as in.SU2.hmc_pg for parallel code
-echo "3       0      1    1.0     0.3  0.025  1       41" > parameters
+echo "3       0      1    0.03814697265625     1.5625  0.025  0       41" > parameters
 echo "SWEEPS  THERM  GAP  LAMBDA  MU   DT     READIN  SEED" >> parameters
 
 # Run
